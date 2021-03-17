@@ -7,4 +7,3 @@ parcelRequire=function(e,r,t,n){var i,o="function"==typeof parcelRequire&&parcel
 },{}],"L4bL":[function(require,module,exports) {
 "use strict";var e=require("./model"),t=require("./templates");require("/css/style.css");var r=document.querySelector("#site");e.model.forEach(function(e){var s="";"title"===e.type?s=(0,t.title)(e):"text"===e.type?s=(0,t.text)(e):"columns"===e.type?s=(0,t.columns)(e):"image"===e.type&&(s=(0,t.image)(e)),r.insertAdjacentHTML("beforeend",s)});
 },{"./model":"kRZE","./templates":"NesY","/css/style.css":"amqR"}]},{},["L4bL"], null)
-//# sourceMappingURL=/script.203f13ea.js.map
