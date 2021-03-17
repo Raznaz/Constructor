@@ -4,7 +4,8 @@
   "description": "javascript pure app",
   "main": "index.js",
   "scripts": {
-    "serve": "parcel ./source/index.html -p 4200 --open"
+    "serve": "parcel ./source/index.html -p 4200 --open",
+    "build": "parcel build ./source/index.html"
   },
   "repository": {
     "type": "git",

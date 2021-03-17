@@ -1,5 +1,6 @@
 import { model } from "./model";
 import { title, text, columns, image } from "./templates";
+import "/css/style.css";
 
 const $site = document.querySelector("#site");
 
