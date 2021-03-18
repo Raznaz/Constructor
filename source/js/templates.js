@@ -2,7 +2,6 @@ import { row, col, css } from "./utils";
 
 function title(block) {
   const { tag = "h1", styles } = block.options;
-
   return row(col(`<${tag}>${block.value}</${tag}>`), css(styles));
 }
 
