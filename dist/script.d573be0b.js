@@ -131,9 +131,10 @@ var _kaan = _interopRequireDefault(require("../assets/kaan.jpg"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var text = "\n\u041A\u0440\u0443\u0442\u044B\u0435 \u0432\u0438\u0434\u0435\u043E \u0442\u0443\u0442: <a href=\"https://www.youtube.com/watch?v=mPZkdNFkNps&ab_channel=RelaxingAmbienceASMR \" target=\"_blank\">\u041F\u0440\u0438\u0440\u043E\u0434\u0430</a>\n";
 var model = [{
   type: "title",
-  value: "Конструктор сайтов на чистом Java Script",
+  value: "Конструктор сайтов на чистом Java Script.",
   options: {
     tag: "h1",
     styles: {
@@ -144,14 +145,41 @@ var model = [{
     }
   }
 }, {
-  type: "text",
-  value: "here we go with some text"
+  type: "image",
+  value: _kaan.default,
+  options: {
+    styles: {
+      padding: "2rem 0",
+      display: "flex",
+      "justify-content": "center"
+    },
+    imageStyles: {
+      width: "500px",
+      alt: "Шоу Каан",
+      height: "auto"
+    }
+  }
 }, {
   type: "columns",
-  value: ["11111111", "22222222", "3333333333"]
+  value: ["Приложение на чистом JavaScript, без использования библиотек", "Узнаешь как работают принципы SOLID и ООП в JavaScript за один курс", "JavaScript - это просто, интересно. Научсь создавать любые UI своими руками", "все в твоих руках"],
+  options: {
+    styles: {
+      background: "linear-gradient(to bottom, #4de, #4a03d9)",
+      padding: "2rem",
+      color: "#fff",
+      "font-weight": "bold"
+    }
+  }
 }, {
-  type: "image",
-  value: _kaan.default
+  type: "text",
+  value: text,
+  options: {
+    styles: {
+      background: "linear-gradient(to bottom, #8e2de2, #fff)",
+      padding: "2rem",
+      "font-weight": "bold"
+    }
+  }
 }];
 exports.model = model;
 },{"../assets/kaan.jpg":"assets/kaan.jpg"}],"js/utils.js":[function(require,module,exports) {
@@ -175,12 +203,18 @@ function col(content) {
 
 function css() {
   var styles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var keys = Object.keys(styles);
-  console.log(keys);
-  var array = keys.map(function (key) {
+
+  // const keys = Object.keys(styles);
+  // console.log(keys);
+  // const array = keys.map((key) => {
+  //   return `${key}: ${styles[key]}`;
+  // });
+  // return array.join(";");
+  var toString = function toString(key) {
     return "".concat(key, ": ").concat(styles[key]);
-  });
-  return array.join(";");
+  };
+
+  return Object.keys(styles).map(toString).join(";");
 }
 },{}],"js/templates.js":[function(require,module,exports) {
 "use strict";
@@ -201,18 +235,23 @@ function title(block) {
 }
 
 function text(block) {
-  return (0, _utils.row)((0, _utils.col)("<p>".concat(block.value, "</p>")));
+  return (0, _utils.row)((0, _utils.col)("<p>".concat(block.value, "</p>")), (0, _utils.css)(block.options.styles));
 }
 
 function columns(block) {
   var html = block.value.map(function (item) {
     return (0, _utils.col)(item);
   });
-  return (0, _utils.row)(html.join(""));
+  return (0, _utils.row)(html.join(""), (0, _utils.css)(block.options.styles));
 }
 
 function image(block) {
-  return (0, _utils.row)("<img src=\"".concat(block.value, "\"/>"));
+  var _block$options2 = block.options,
+      imageStyles = _block$options2.imageStyles,
+      _block$options2$alt = _block$options2.alt,
+      alt = _block$options2$alt === void 0 ? "" : _block$options2$alt,
+      styles = _block$options2.styles;
+  return (0, _utils.row)("<img src=\"".concat(block.value, "\" alt=\"").concat(alt, "\" style=\"").concat((0, _utils.css)(imageStyles), "\"/>"), (0, _utils.css)(styles));
 }
 
 var templates = {
@@ -340,7 +379,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49618" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51556" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
