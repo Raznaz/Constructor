@@ -128,6 +128,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.row = row;
 exports.col = col;
 exports.css = css;
+exports.block = block;
 
 function row(content) {
   var styles = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
@@ -141,17 +142,19 @@ function col(content) {
 function css() {
   var styles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  // const keys = Object.keys(styles);
-  // console.log(keys);
-  // const array = keys.map((key) => {
-  //   return `${key}: ${styles[key]}`;
-  // });
-  // return array.join(";");
+  if (typeof styles === "string") {
+    return styles;
+  }
+
   var toString = function toString(key) {
     return "".concat(key, ": ").concat(styles[key]);
   };
 
   return Object.keys(styles).map(toString).join(";");
+}
+
+function block(type) {
+  return "\n  <form name=\"".concat(type, "\">\n  <h5>").concat(type, "</h5>\n  <div class=\"form-group\">\n  <input class=\"form-control form-control-sm\" name=\"value\" placeholder=\"value\">\n  </div>\n  <div class=\"form-group\">\n    <input class=\"form-controll form-control-sm\" name=\"styles\" placeholder=\"styles\">\n  </div>\n  <button type=\"submit\" class=\"btn btn-primary btn-sm\">\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C</button>\n  </form>\n  <hr>\n  ");
 }
 },{}],"classes/blocks.js":[function(require,module,exports) {
 "use strict";
@@ -186,10 +189,9 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var Block = /*#__PURE__*/function () {
-  function Block(type, value, options) {
+  function Block(value, options) {
     _classCallCheck(this, Block);
 
-    this.type = type;
     this.value = value;
     this.options = options;
   }
@@ -212,7 +214,7 @@ var TitleBlock = /*#__PURE__*/function (_Block) {
   function TitleBlock(value, options) {
     _classCallCheck(this, TitleBlock);
 
-    return _super.call(this, "title", value, options);
+    return _super.call(this, value, options);
   }
 
   _createClass(TitleBlock, [{
@@ -239,7 +241,7 @@ var ImageBlock = /*#__PURE__*/function (_Block2) {
   function ImageBlock(value, options) {
     _classCallCheck(this, ImageBlock);
 
-    return _super2.call(this, "image", value, options);
+    return _super2.call(this, value, options);
   }
 
   _createClass(ImageBlock, [{
@@ -267,7 +269,7 @@ var ColumnsBlock = /*#__PURE__*/function (_Block3) {
   function ColumnsBlock(value, options) {
     _classCallCheck(this, ColumnsBlock);
 
-    return _super3.call(this, "columns", value, options);
+    return _super3.call(this, value, options);
   }
 
   _createClass(ColumnsBlock, [{
@@ -293,7 +295,7 @@ var TextBlock = /*#__PURE__*/function (_Block4) {
   function TextBlock(value, options) {
     _classCallCheck(this, TextBlock);
 
-    return _super4.call(this, "text", value, options);
+    return _super4.call(this, value, options);
   }
 
   _createClass(TextBlock, [{
@@ -356,7 +358,150 @@ var model = [new _blocks.TitleBlock("Конструктор сайтов на ч
   }
 })];
 exports.model = model;
-},{"../assets/kaan.jpg":"assets/kaan.jpg","../classes/blocks":"classes/blocks.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"../assets/kaan.jpg":"assets/kaan.jpg","../classes/blocks":"classes/blocks.js"}],"classes/site.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Site = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Site = /*#__PURE__*/function () {
+  function Site(selector) {
+    _classCallCheck(this, Site);
+
+    this.$el = document.querySelector(selector);
+  }
+
+  _createClass(Site, [{
+    key: "render",
+    value: function render(model) {
+      var _this = this;
+
+      this.$el.innerHTML = "", model.forEach(function (block) {
+        _this.$el.insertAdjacentHTML("beforeend", block.toHTML());
+      });
+    }
+  }]);
+
+  return Site;
+}();
+
+exports.Site = Site;
+},{}],"classes/sidebar.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Sidebar = void 0;
+
+var _utils = require("../js/utils");
+
+var _blocks = require("./blocks");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Sidebar = /*#__PURE__*/function () {
+  function Sidebar(selector, updateCallback) {
+    _classCallCheck(this, Sidebar);
+
+    this.$el = document.querySelector(selector);
+    this.update = updateCallback;
+    this.init();
+  }
+
+  _createClass(Sidebar, [{
+    key: "init",
+    value: function init() {
+      this.$el.insertAdjacentHTML("afterbegin", this.template);
+      this.$el.addEventListener("submit", this.add.bind(this));
+    }
+  }, {
+    key: "template",
+    get: function get() {
+      return [(0, _utils.block)("text"), (0, _utils.block)("title")].join("");
+    }
+  }, {
+    key: "add",
+    value: function add(event) {
+      event.preventDefault();
+      var type = event.target.name;
+      var value = event.target.value.value;
+      var styles = event.target.styles.value;
+      var newBlock = type === "text" ? new _blocks.TextBlock(value, {
+        styles: styles
+      }) : new _blocks.TitleBlock(value, {
+        styles: styles
+      });
+      this.update(newBlock);
+      event.target.value.value = "";
+      event.target.styles.value = "";
+    }
+  }]);
+
+  return Sidebar;
+}();
+
+exports.Sidebar = Sidebar;
+},{"../js/utils":"js/utils.js","./blocks":"classes/blocks.js"}],"classes/app.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.App = void 0;
+
+var _site = require("./site");
+
+var _sidebar = require("./sidebar");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var App = /*#__PURE__*/function () {
+  function App(model) {
+    _classCallCheck(this, App);
+
+    this.model = model;
+  }
+
+  _createClass(App, [{
+    key: "init",
+    value: function init() {
+      var _this = this;
+
+      var site = new _site.Site("#site");
+      site.render(this.model);
+
+      var updateCallback = function updateCallback(newBlock) {
+        _this.model.push(newBlock);
+
+        site.render(_this.model);
+      };
+
+      new _sidebar.Sidebar("#panel", updateCallback);
+    }
+  }]);
+
+  return App;
+}();
+
+exports.App = App;
+},{"./site":"classes/site.js","./sidebar":"classes/sidebar.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -433,14 +578,14 @@ module.hot.accept(reloadCSS);
 
 var _model = require("./model");
 
+var _app = require("../classes/app");
+
 require("/css/style.css");
 
-var $site = document.querySelector("#site");
-
-_model.model.forEach(function (block) {
-  $site.insertAdjacentHTML("beforeend", block.toHTML());
-});
-},{"./model":"js/model.js","/css/style.css":"css/style.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+// import { Site } from "../classes/site";
+// import { Sidebar } from "../classes/sidebar";
+new _app.App(_model.model).init();
+},{"./model":"js/model.js","../classes/app":"classes/app.js","/css/style.css":"css/style.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -468,7 +613,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52918" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57059" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
