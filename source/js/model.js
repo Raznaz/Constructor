@@ -7,11 +7,11 @@ import {
 } from "../classes/blocks";
 
 const text = `
-Крутые видео тут: <a href="https://www.youtube.com/watch?v=mPZkdNFkNps&ab_channel=RelaxingAmbienceASMR " target="_blank">Природа</a>
+Код проекта можно посмотреть тут: <a href="https://github.com/Raznaz/Constructor" target="_blank">https://github.com/Raznaz/Constructor</a>
 `;
 
 export const model = [
-  new TitleBlock("Конструктор сайтов на чистом Java Script.", {
+  new TitleBlock("Конструктор сайтa на чистом Javascript.", {
     tag: "h1",
     styles: {
       background: "linear-gradient(to right, #ff0099, #493240)",
@@ -35,14 +35,15 @@ export const model = [
   }),
   new ColumnsBlock(
     [
-      "Приложение на чистом JavaScript, без использования библиотек",
-      "Узнаешь как работают принципы SOLID и ООП в JavaScript за один курс",
-      "JavaScript - это просто, интересно. Научсь создавать любые UI своими руками",
-      "все в твоих руках",
+      "Использовались принципы SOLID и ООП",
+      "Код написан на чистом javascript, без использования библиотек",
+      "Собран сборщиком Parcel и залит на хостинг Firebase",
     ],
     {
       styles: {
         background: "linear-gradient(to bottom, #4de, #4a03d9)",
+        "border-radius": "40px",
+        "box-shadow": "10px -10px 20px #ccc",
         padding: "2rem",
         color: "#fff",
         "font-weight": "bold",
@@ -52,7 +53,9 @@ export const model = [
   new TextBlock(text, {
     styles: {
       background: "linear-gradient(to bottom, #8e2de2, #fff)",
+      "border-radius": "40px",
       padding: "2rem",
+      margin: "1rem",
       "font-weight": "bold",
     },
   }),

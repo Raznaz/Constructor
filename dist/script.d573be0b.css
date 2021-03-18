@@ -23,5 +23,10 @@ body {
   overflow-y: auto;
 }
 
+.btn-ind,
+input {
+  margin: 10px 0;
+}
+
 
 /*# sourceMappingURL=/script.d573be0b.css.map */

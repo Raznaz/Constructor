@@ -154,7 +154,7 @@ function css() {
 }
 
 function block(type) {
-  return "\n  <form name=\"".concat(type, "\">\n  <h5>").concat(type, "</h5>\n  <div class=\"form-group\">\n  <input class=\"form-control form-control-sm\" name=\"value\" placeholder=\"value\">\n  </div>\n  <div class=\"form-group\">\n    <input class=\"form-controll form-control-sm\" name=\"styles\" placeholder=\"styles\">\n  </div>\n  <button type=\"submit\" class=\"btn btn-primary btn-sm\">\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C</button>\n  </form>\n  <hr>\n  ");
+  return "\n  <form name=\"".concat(type, "\">\n  <h5>").concat(type, "</h5>\n  <div class=\"form-group\">\n  <input class=\"form-control form-control-sm\" name=\"value\" placeholder=\"value\">\n  </div>\n  <div class=\"form-group\">\n    <input class=\"form-control form-control-sm\" name=\"styles\" placeholder=\"styles\">\n  </div>\n  <button type=\"submit\" class=\"btn btn-primary btn-sm btn-ind\">\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C</button>\n  </form>\n  <hr>\n  ");
 }
 },{}],"classes/blocks.js":[function(require,module,exports) {
 "use strict";
@@ -323,8 +323,8 @@ var _blocks = require("../classes/blocks");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var text = "\n\u041A\u0440\u0443\u0442\u044B\u0435 \u0432\u0438\u0434\u0435\u043E \u0442\u0443\u0442: <a href=\"https://www.youtube.com/watch?v=mPZkdNFkNps&ab_channel=RelaxingAmbienceASMR \" target=\"_blank\">\u041F\u0440\u0438\u0440\u043E\u0434\u0430</a>\n";
-var model = [new _blocks.TitleBlock("Конструктор сайтов на чистом Java Script.", {
+var text = "\n\u041A\u043E\u0434 \u043F\u0440\u043E\u0435\u043A\u0442\u0430 \u043C\u043E\u0436\u043D\u043E \u043F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0442\u0443\u0442: <a href=\"https://github.com/Raznaz/Constructor\" target=\"_blank\">https://github.com/Raznaz/Constructor</a>\n";
+var model = [new _blocks.TitleBlock("Конструктор сайтa на чистом Javascript.", {
   tag: "h1",
   styles: {
     background: "linear-gradient(to right, #ff0099, #493240)",
@@ -343,9 +343,11 @@ var model = [new _blocks.TitleBlock("Конструктор сайтов на ч
     alt: "Шоу Каан",
     height: "auto"
   }
-}), new _blocks.ColumnsBlock(["Приложение на чистом JavaScript, без использования библиотек", "Узнаешь как работают принципы SOLID и ООП в JavaScript за один курс", "JavaScript - это просто, интересно. Научсь создавать любые UI своими руками", "все в твоих руках"], {
+}), new _blocks.ColumnsBlock(["Использовались принципы SOLID и ООП", "Код написан на чистом javascript, без использования библиотек", "Собран сборщиком Parcel и залит на хостинг Firebase"], {
   styles: {
     background: "linear-gradient(to bottom, #4de, #4a03d9)",
+    "border-radius": "40px",
+    "box-shadow": "10px -10px 20px #ccc",
     padding: "2rem",
     color: "#fff",
     "font-weight": "bold"
@@ -353,7 +355,9 @@ var model = [new _blocks.TitleBlock("Конструктор сайтов на ч
 }), new _blocks.TextBlock(text, {
   styles: {
     background: "linear-gradient(to bottom, #8e2de2, #fff)",
+    "border-radius": "40px",
     padding: "2rem",
+    margin: "1rem",
     "font-weight": "bold"
   }
 })];
@@ -424,13 +428,13 @@ var Sidebar = /*#__PURE__*/function () {
   _createClass(Sidebar, [{
     key: "init",
     value: function init() {
-      this.$el.insertAdjacentHTML("afterbegin", this.template);
+      this.$el.insertAdjacentHTML("beforeend", this.template);
       this.$el.addEventListener("submit", this.add.bind(this));
     }
   }, {
     key: "template",
     get: function get() {
-      return [(0, _utils.block)("text"), (0, _utils.block)("title")].join("");
+      return [(0, _utils.block)("Заголовок"), (0, _utils.block)("Текст")].join("");
     }
   }, {
     key: "add",
@@ -613,7 +617,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57059" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61920" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

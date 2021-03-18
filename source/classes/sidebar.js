@@ -9,12 +9,12 @@ export class Sidebar {
   }
 
   init() {
-    this.$el.insertAdjacentHTML("afterbegin", this.template);
+    this.$el.insertAdjacentHTML("beforeend", this.template);
     this.$el.addEventListener("submit", this.add.bind(this));
   }
 
   get template() {
-    return [block("text"), block("title")].join("");
+    return [block("Заголовок"), block("Текст")].join("");
   }
 
   add(event) {

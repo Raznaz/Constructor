@@ -22,3 +22,8 @@ body {
   border-style: inset -1px 0 0 rgba(0, 0, 0, 0.1);
   overflow-y: auto;
 }
+
+.btn-ind,
+input {
+  margin: 10px 0;
+}
